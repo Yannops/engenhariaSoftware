@@ -19,26 +19,24 @@ public class FuncionarioDao {
 
     private Connection connection;
 
-    
     String nome;
     String CPF;
     String dataNascimento;
-    String cargo;
+    String  cargo;
 
     public FuncionarioDao() {
         this.connection = new ConnectionFactory().getConnection();
     }
 
     public void adiciona(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionarios (id_funcionario,nome,cpf,id_cargo,dt_Nascimento) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO funcionarios  (nome,cpf,dt_Nascimento,cargo_nome) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-           
+
             stmt.setString(1, funcionario.getNome());
             stmt.setString(2, funcionario.getCPF());
-            stmt.setInt(3, (int) funcionario.getCargo().getId());
-            stmt.setString(4, funcionario.getDataNascimento());
-
+            stmt.setString(3, funcionario.getDataNascimento());
+            stmt.setString(4, funcionario.getCargo());
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {

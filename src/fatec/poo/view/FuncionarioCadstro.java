@@ -6,6 +6,7 @@
 package fatec.poo.view;
 
 import fatec.poo.DAO.FuncionarioDao;
+import fatec.poo.model.Cargo;
 import fatec.poo.model.Funcionario;
 import javax.swing.JOptionPane;
 
@@ -49,8 +50,12 @@ public class FuncionarioCadstro extends javax.swing.JInternalFrame {
 
         jTextField4.setText("jTextField4");
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setMinimumSize(new java.awt.Dimension(250, 250));
         setPreferredSize(new java.awt.Dimension(500, 250));
+        setVisible(true);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setText("Nome");
@@ -132,24 +137,23 @@ public class FuncionarioCadstro extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         Funcionario f = new Funcionario();
-        
+        Cargo c = new Cargo ();
+        c.setNome(title);
         f.setNome(tNome.getText());
         f.setCPF(tCpf.getText());
-        f.getCargo().setNome(tCargo.getText());
         f.setDataNascimento(tDataNascimento.getText());
         
-        if(tNome.getText().isEmpty()||tCpf.getText().isEmpty()||tCargo.getText().isEmpty()||tDataNascimento.getText().isEmpty()){
+        if (tNome.getText().isEmpty() || tCpf.getText().isEmpty() || tCargo.getText().isEmpty() || tDataNascimento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Os campos nao devem ser nulos");
-        }
-        else{
+        } else {
             FuncionarioDao fd = new FuncionarioDao();
             fd.adiciona(f);
-            JOptionPane.showMessageDialog(null, "Funcionario"+tNome.getText()+"Inserido COM sucesso ");
+            JOptionPane.showMessageDialog(null, "Funcionario" + tNome.getText() + "Inserido COM sucesso ");
             tNome.setText("");
             tCpf.setText("");
             tCargo.setText("");
             tDataNascimento.setText("");
-    
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
