@@ -131,6 +131,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Venda");
 
         jMenuItem4.setText("Venda Direta");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Vendas do Dia");
@@ -198,6 +203,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         cp.show();
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        VendaView vv = new VendaView();
+        desktop.add(vv);
+        this.setLocationRelativeTo(null);
+        vv.show();
+
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
