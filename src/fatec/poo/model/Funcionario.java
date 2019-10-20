@@ -17,7 +17,7 @@ public class Funcionario {
     private String nome;
     private String CPF;
     private String dataNascimento;
-    private String  cargo;
+    private long cargo;
 
     public long getId() {
         return id;
@@ -51,11 +51,11 @@ public class Funcionario {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getCargo() {
+    public long getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(long cargo) {
         this.cargo = cargo;
     }
 

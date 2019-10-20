@@ -29,14 +29,14 @@ public class FuncionarioDao {
     }
 
     public void adiciona(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionarios  (nome,cpf,dt_Nascimento,cargo_nome) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO funcionarios (nome, cpf, dt_Nascimento, cargo) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             stmt.setString(1, funcionario.getNome());
             stmt.setString(2, funcionario.getCPF());
             stmt.setString(3, funcionario.getDataNascimento());
-            stmt.setString(4, funcionario.getCargo());
+            stmt.setLong(4, funcionario.getCargo());
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {
