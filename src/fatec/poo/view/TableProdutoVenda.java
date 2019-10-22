@@ -84,6 +84,8 @@ public class TableProdutoVenda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 100));
+
         tableProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -92,6 +94,7 @@ public class TableProdutoVenda extends javax.swing.JFrame {
                 "Cod Produto", "Descrição", "Tipo", "Val. Un"
             }
         ));
+        tableProduto.setPreferredSize(new java.awt.Dimension(100, 100));
         tableProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableProdutoMouseClicked(evt);
