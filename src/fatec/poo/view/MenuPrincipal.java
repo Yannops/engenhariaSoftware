@@ -205,10 +205,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        VendaView vv = new VendaView();
-        desktop.add(vv);
-        this.setLocationRelativeTo(null);
-        vv.show();
+       VendaView vv=  new VendaView();
+       vv.setVisible(true);
 
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed

@@ -125,9 +125,11 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         double num = Double.parseDouble(tpreco.getText());
         long cod = Integer.parseInt(tcod.getText());
         p.setCodProduto(cod);
-        p.setPreco(num);
         p.setDescricao(tdesc.getText());
-        p.setTipo(cbTipo.getName());
+       
+        p.setPreco(num);
+        String b = (String) cbTipo.getSelectedItem();
+         p.setTipo(b);
 
         if (tcod.getText().isEmpty() || tdesc.getText().isEmpty() || tcod.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Os campos devem ser prenenchidos !");
