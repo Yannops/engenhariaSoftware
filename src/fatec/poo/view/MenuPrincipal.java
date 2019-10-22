@@ -59,6 +59,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem15.setText("jMenuItem15");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Fritadinhos POWER");
+        setResizable(false);
 
         desktop.setBackground(new java.awt.Color(102, 9, 51));
         desktop.setPreferredSize(new java.awt.Dimension(1024, 768));
@@ -188,8 +190,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FuncionarioCadstro f = new FuncionarioCadstro();
+        CadastroFuncionario f = new CadastroFuncionario();
         //ccv.setVisible(true);
+        f.setSize(585, 284);
         desktop.add(f);
         this.setLocationRelativeTo(null);
         f.show();
