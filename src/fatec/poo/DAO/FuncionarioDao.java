@@ -9,6 +9,7 @@ import fatec.poo.factory.ConnectionFactory;
 import fatec.poo.model.Funcionario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -42,7 +43,84 @@ public class FuncionarioDao {
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
-
+    }
+    
+    public int tamPesquisa(String nome){
+        String sqlTam = "SELECT count(*) FROM funcionarios WHERE nome like ?";
+        try {
+            int tam = 0;
+            PreparedStatement stmt = connection.prepareStatement(sqlTam);
+            stmt.setString(1, nome+"%");
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                tam = rs.getInt("count(*)");
+            }
+            
+            return tam;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public Funcionario[] pesquisar(String nome) {
+        Funcionario[] funcionario;
+        String sql = "SELECT * FROM funcionarios WHERE nome like ?";
+        try {
+            
+            int tam = tamPesquisa(nome);
+            funcionario = new Funcionario[tam];
+            int i = 0;
+            
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, nome+"%");
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                funcionario[i] = new Funcionario();
+                funcionario[i].setId(rs.getLong("id"));
+                funcionario[i].setNome(rs.getString("nome"));
+                funcionario[i].setCPF(rs.getString("cpf"));
+                funcionario[i].setCargo(rs.getLong("cargo"));
+                funcionario[i].setDataNascimento(rs.getString("dt_Nascimento"));
+                i++;
+            }
+            
+            stmt.close();
+            return funcionario;
+                
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+    }
+    
+    public void deletar(String cpf) {
+        String sql = "DELETE FROM funcionarios WHERE cpf = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, cpf);
+            stmt.executeUpdate();
+            
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+    }
+    
+    public void alterar(Funcionario f, String cpf){
+        String sql = "UPDATE funcionarios SET nome = ?, cargo = ?, cpf = ?, dt_Nascimento = ? WHERE cpf = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, f.getNome());
+            stmt.setLong(2, f.getCargo());
+            stmt.setString(3, f.getCPF());
+            stmt.setString(4, f.getDataNascimento());
+            stmt.setString(5, cpf);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
     }
 
 }
