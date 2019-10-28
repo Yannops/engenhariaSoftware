@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+<<<<<<< HEAD
+            <file>file:/E:/Programação/Engenharia%20III/engenhariaSoftware/src/fatec/poo/DAO/FuncionarioDao.java</file>
+            <file>file:/E:/Programação/Engenharia%20III/engenhariaSoftware/src/fatec/poo/view/MenuPrincipal.java</file>
+            <file>file:/E:/Programação/Engenharia%20III/engenhariaSoftware/src/fatec/poo/view/CadastroFuncionario.java</file>
+=======
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/view/VendaView.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/model/ValidatorCPF.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/DAO/ProdutoDao.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/model/Endereco.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/view/MenuPrincipal.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/view/CadastroCliente.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/DAO/ClienteDao.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/model/Cliente.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/factory/ConnectionFactory.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/view/CadastroProduto.java</file>
+            <file>file:/C:/Users/Kaique/Documents/engenhariaSoftware/src/fatec/poo/factory/TestaConexao.java</file>
+>>>>>>> 0f600ea3d589e9f540ed0f383fb4b9e87c51885c
+        </group>
+    </open-files>
+</project-private>
