@@ -17,7 +17,7 @@ public class Cliente {
     private String cpfCnpj;
     private String email ;
     private String telefone;
-    private String endereco;
+    private Endereco endereco;
     private String observalcao;
     private LocalDate data;
 
@@ -53,14 +53,14 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-
+    
     public String getObservalcao() {
         return observalcao;
     }
@@ -75,6 +75,10 @@ public class Cliente {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+    public void adiciona (Endereco end){
+        endereco = end ;
+        
     }
     
     

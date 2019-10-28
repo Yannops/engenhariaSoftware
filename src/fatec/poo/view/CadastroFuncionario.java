@@ -43,7 +43,7 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
         txtCPF = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        cmbCargo = new javax.swing.JComboBox<>();
+        cmbCargo = new javax.swing.JComboBox<String>();
         jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
@@ -89,7 +89,7 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
         jLabel5.setText("Data Nascimento");
 
         cmbCargo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Funcionário" }));
+        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gerente", "Funcionário" }));
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Limpar");
@@ -126,12 +126,12 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtDataNasc)
                             .addComponent(cmbCargo, 0, 309, Short.MAX_VALUE))))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

@@ -5,6 +5,9 @@
  */
 package fatec.poo.view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author Kaique
@@ -17,7 +20,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        int inset = 50;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds(inset, inset,
+                screenSize.width - inset * 2,
+                screenSize.height - inset * 2);
 
+        this.setVisible(true);
     }
 
     /**
@@ -63,17 +72,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setResizable(false);
 
         desktop.setBackground(new java.awt.Color(102, 9, 51));
-        desktop.setPreferredSize(new java.awt.Dimension(1024, 768));
+        desktop.setPreferredSize(new java.awt.Dimension(1000, 1500));
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 1500, Short.MAX_VALUE)
         );
 
         jMenu5.setText("Funcionario");
@@ -167,12 +176,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -209,9 +218,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         VendaView vv = new VendaView();
-        desktop.add(vv);
-        this.setLocationRelativeTo(null);
-        vv.show();
+        vv.setVisible(true);
 
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
