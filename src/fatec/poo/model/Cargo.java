@@ -11,7 +11,8 @@ package fatec.poo.model;
  */
 public class Cargo {
     
-    private long id;
+    private long id; 
+    private long pica;
     private String nome;
 
     public long getId() {
