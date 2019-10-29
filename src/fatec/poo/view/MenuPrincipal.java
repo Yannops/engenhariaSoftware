@@ -201,7 +201,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         CadastroFuncionario f = new CadastroFuncionario();
         //ccv.setVisible(true);
-        f.setSize(585, 284);
+        f.setSize(1025, 500);
         desktop.add(f);
         this.setLocationRelativeTo(null);
         f.show();
