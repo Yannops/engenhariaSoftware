@@ -44,16 +44,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -82,12 +76,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1500, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
 
         jMenu5.setText("Funcionario");
 
-        jMenuItem2.setText("Funcionario");
+        jMenuItem2.setText("Controle Funcionário");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -95,17 +89,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem2);
 
-        jMenuItem9.setText("Pesquisar Funcionario");
-        jMenu5.add(jMenuItem9);
-
-        jMenuItem10.setText("Alterar Funcionario");
-        jMenu5.add(jMenuItem10);
-
         jMenuBar1.add(jMenu5);
 
         jMenu4.setText("Cliente");
 
-        jMenuItem1.setText("Cadastrar Cliente");
+        jMenuItem1.setText("Controle Cliente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -113,29 +101,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem1);
 
-        jMenuItem7.setText("Pesquisar Cliente");
-        jMenu4.add(jMenuItem7);
-
-        jMenuItem8.setText("Alterar Cliente");
-        jMenu4.add(jMenuItem8);
-
         jMenuBar1.add(jMenu4);
 
         jMenu1.setText("Produto");
 
-        jMenuItem3.setText("Cadastrar Produto");
+        jMenuItem3.setText("Controle Produto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem3);
-
-        jMenuItem11.setText("Pesquisar Produto");
-        jMenu1.add(jMenuItem11);
-
-        jMenuItem12.setText("Alterar Produto");
-        jMenu1.add(jMenuItem12);
 
         jMenuBar1.add(jMenu1);
 
@@ -176,7 +152,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,16 +174,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        CadastroFuncionario f = new CadastroFuncionario();
-        //ccv.setVisible(true);
-        f.setSize(1025, 500);
-        desktop.add(f);
-        this.setLocationRelativeTo(null);
-        f.show();
-
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         CadastroProduto cp = new CadastroProduto();
         desktop.add(cp);
@@ -222,6 +188,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        CadastroFuncionario f = new CadastroFuncionario();
+        //ccv.setVisible(true);
+        f.setSize(1025, 500);
+        desktop.add(f);
+        this.setLocationRelativeTo(null);
+        f.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,9 +245,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
@@ -282,8 +254,5 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

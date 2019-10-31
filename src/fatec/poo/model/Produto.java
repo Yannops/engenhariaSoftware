@@ -11,16 +11,25 @@ package fatec.poo.model;
  */
 public class Produto {
 
-    private long codProduto;
+    private int codProduto;
     private String descricao;
     private double preco;
     private String tipo;
+    private byte[] imagem;
 
-    public long getCodProduto() {
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+            
+    public int getCodProduto() {
         return codProduto;
     }
 
-    public void setCodProduto(long codProduto) {
+    public void setCodProduto(int codProduto) {
         this.codProduto = codProduto;
     }
 

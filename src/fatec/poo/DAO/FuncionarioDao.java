@@ -78,7 +78,7 @@ public class FuncionarioDao {
             
             while(rs.next()){
                 funcionario[i] = new Funcionario();
-                funcionario[i].setId(rs.getLong("id"));
+                funcionario[i].setId(rs.getLong("id_funcionario"));
                 funcionario[i].setNome(rs.getString("nome"));
                 funcionario[i].setCPF(rs.getString("cpf"));
                 funcionario[i].setCargo(rs.getLong("cargo"));

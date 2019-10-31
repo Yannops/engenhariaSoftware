@@ -75,7 +75,6 @@ public class ClienteDao {
             JOptionPane.showMessageDialog(null, "Deletado com Sucesso!");
 
         } catch (SQLException ex) {
-            System.out.println("Erro na query!");
             JOptionPane.showMessageDialog(null, "Aconteceu algum Erro !");
         }
     }
@@ -101,7 +100,6 @@ public class ClienteDao {
             JOptionPane.showMessageDialog(null, "Atualizado com Sucesso!");
 
         } catch (SQLException ex) {
-            System.out.println("Erro na query!");
             JOptionPane.showMessageDialog(null, "Aconteceu algum Erro !");
         }
     }

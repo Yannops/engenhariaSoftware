@@ -5,8 +5,6 @@
  */
 package fatec.poo.model;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author Kaique
