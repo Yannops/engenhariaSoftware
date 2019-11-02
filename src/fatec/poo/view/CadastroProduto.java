@@ -3,6 +3,7 @@ package fatec.poo.view;
 import fatec.poo.DAO.ProdutoDao;
 import fatec.poo.model.Produto;
 import fatec.poo.util.Imagem;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.SQLException;
@@ -21,11 +22,12 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
     private boolean status;
     BufferedImage imagem;
+
     /**
      * Creates new form CadastroProduto
      */
-   
     public CadastroProduto() {
+
         initComponents();
     }
 
@@ -184,48 +186,57 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         p.setDescricao(tdesc.getText());
         p.setPreco(num);
         String b = (String) cbTipo.getSelectedItem();
-        p.setTipo(b);        
+        p.setTipo(b);
         p.setImagem(Imagem.getImgBytes(imagem));
 
         ProdutoDao dao = new ProdutoDao();
         try {
-            if(jlabelimagemaction.getText().equals("")){
-             dao.adiciona(p);
-             JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");    
-            } else{
-               dao.adiciona(p);
-               JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
+            if (jlabelimagemaction.getText().equals("")) {
+                dao.adiciona(p);
+                JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
+            } else {
+                dao.adiciona(p);
+                JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Código de Produto Já Cadastrado Anteriormente!");
         }
 
         limparCampos();
+
     }//GEN-LAST:event_bCadastraActionPerformed
+    public void setPosicao() {
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
 
     private void SelecionaEpreencheCampos() {
         // passando da linha selecionada da table para os TextFiel 
         ProdutoDao produtoDao = new ProdutoDao();
-        
+
         int indice = tableprod.getSelectedRow();
         tcod.setText(tableprod.getValueAt(indice, 0).toString());
+
         tdesc.setText(tableprod.getValueAt(indice, 1).toString());
         tpreco.setText(tableprod.getValueAt(indice, 2).toString());
-        if ("kg".equals(tableprod.getValueAt(indice, 3).toString())) 
+        if ("kg".equals(tableprod.getValueAt(indice, 3).toString())) {
             cbTipo.setSelectedIndex(0);
-         else if ("ml".equals(tableprod.getValueAt(indice, 3).toString())) 
+        } else if ("ml".equals(tableprod.getValueAt(indice, 3).toString())) {
             cbTipo.setSelectedIndex(1);
-         else 
+        } else {
             cbTipo.setSelectedIndex(2);
-        int cod = tcod.setText((tableprod.getValueAt(indice, 0)));
-        try {
-            Produto prod = produtoDao.buscaimagem(cod);
-            Imagem.exibiImagemLabel(prod.getImagem(), jlabelimagemaction);
-        } catch (SQLException ex) {
-           
         }
         status = true;
+        try {
+            Integer id = Integer.parseInt(tcod.getText());
+            ProdutoDao dao = new ProdutoDao();
+            Produto prod = dao.buscaimagem(id);
+            Imagem.exibiImagemLabel(prod.getImagem(), jlabelimagemaction);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void readForTable(String desc) {
@@ -280,6 +291,8 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         produto.setCodProduto(Integer.parseInt(tcod.getText()));
         produto.setDescricao(tdesc.getText());
         produto.setPreco(Double.parseDouble(tpreco.getText()));
+        produto.setImagem(Imagem.getImgBytes(imagem));
+
         try {
             produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
 
@@ -287,7 +300,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Produto Alterado!");
-        
+
         limpaTable();
         limparCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -308,9 +321,9 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     private void jimagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jimagemActionPerformed
         JFileChooser jfc = new JFileChooser();
         int res = jfc.showOpenDialog(null);
-        if(res == JFileChooser.APPROVE_OPTION){
+        if (res == JFileChooser.APPROVE_OPTION) {
             File arquivo = jfc.getSelectedFile();
-            
+
             try {
                 imagem = Imagem.setImagemDimensao(arquivo.getAbsolutePath(), 200, 200);
                 jlabelimagemaction.setIcon(new ImageIcon(imagem));
@@ -323,12 +336,23 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         tcod.setText("");
         tpreco.setText("");
         tdesc.setText("");
-        jlabelimagemaction.setText("");
+        jlabelimagemaction.setIcon(null);
     }
 
     private void limpaTable() {
         ((DefaultTableModel) tableprod.getModel()).setNumRows(0);
         tableprod.updateUI();
+    }
+
+    private void carregaImagem() {
+        try {
+            Integer id = Integer.parseInt(tcod.getText());
+            ProdutoDao dao = new ProdutoDao();
+            Produto prod = dao.buscaimagem(id);
+            Imagem.exibiImagemLabel(prod.getImagem(), jLabelimagem);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -17,6 +17,7 @@ public class VendaView extends javax.swing.JFrame {
 
     public VendaView() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -52,14 +53,26 @@ public class VendaView extends javax.swing.JFrame {
             }
         });
 
+        tCodigo.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        tCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tCodigoKeyPressed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Pesquisar produto por nome ou (F6)Por código ou código de barras");
 
         jLabel5.setText("Quantidade");
 
+        tQuantidade.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+
+        tValorIten.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+
         jLabel6.setText("Valor Por item      R$");
 
         jTextField8.setEditable(false);
+        jTextField8.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
 
         jLabel8.setText("Valot Total         R$");
 
@@ -226,7 +239,6 @@ public class VendaView extends javax.swing.JFrame {
                 tpv.setLocationRelativeTo(null);
                 tpv.setVisible(true);
                 tpv.setResizable(false);
-                
             }
             tpv.enviaParaPesquisa(this, tCodigo.getText());
 
@@ -253,6 +265,10 @@ public class VendaView extends javax.swing.JFrame {
         tValorIten.setText(tableVenda.getValueAt(indice, 3).toString());
        // tQuantidade.setText(tableVenda.getValueAt(indice, 4).toString());
     }//GEN-LAST:event_tableVendaKeyPressed
+
+    private void tCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tCodigoKeyPressed
+//chama metodo de pesquisa do produto 
+    }//GEN-LAST:event_tCodigoKeyPressed
 
     public void enviarParaPesquisa(VendaView v1, String produtoPesquisa) {
         tCodigo.setText(produtoPesquisa);

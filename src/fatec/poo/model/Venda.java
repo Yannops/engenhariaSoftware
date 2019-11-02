@@ -5,6 +5,8 @@
  */
 package fatec.poo.model;
 
+import java.util.List;
+
 /**
  *
  * @author Kaique
@@ -13,8 +15,9 @@ public class Venda {
 
     private long idVenda;
     private double valorVenda;
-    private ProdutoVenda produtoVebda;
+    private List<ProdutoVenda> produtoVebda;
     private Cliente clienteVenda;
+    private double valorTotalVenda;
 
     public long getIdVenda() {
         return idVenda;
@@ -32,11 +35,11 @@ public class Venda {
         this.valorVenda = valorVenda;
     }
 
-    public ProdutoVenda getProdutoVebda() {
+    public List<ProdutoVenda> getProdutoVebda() {
         return produtoVebda;
     }
 
-    public void setProdutoVebda(ProdutoVenda produtoVebda) {
+    public void setProdutoVebda(List<ProdutoVenda> produtoVebda) {
         this.produtoVebda = produtoVebda;
     }
 
@@ -46,6 +49,14 @@ public class Venda {
 
     public void setClienteVenda(Cliente clienteVenda) {
         this.clienteVenda = clienteVenda;
+    }
+
+    public double getValorTotalVenda() {
+        return valorTotalVenda;
+    }
+
+    public void setValorTotalVenda(double valorTotalVenda) {
+        this.valorTotalVenda = valorTotalVenda;
     }
 
 }
