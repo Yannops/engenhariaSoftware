@@ -59,7 +59,7 @@ public class ProdutoDao {
         prepara.setInt(1, (int) produto.getCodProduto());
         prepara.setString(2, produto.getDescricao());
         prepara.setString(4, produto.getTipo());
-        prepara.setDouble(3, produto.getPreco());
+        prepara.setString(3, produto.getPreco());
         prepara.setBytes(5,  produto.getImagem());
         prepara.executeUpdate();
         prepara.close();
@@ -68,14 +68,14 @@ public class ProdutoDao {
 
     public void update(Produto produto, int cod) throws SQLException {
 
-        String sql = "UPDATE produto SET cod_produto = ? , descricao = ?, preco = ?, imagem = ? where cod_produto = (select cod_produto from produto where cod_produto = ?)";
+        String sql = "UPDATE produto SET cod_produto = ? , descricao = ?, preco = ?, imagem = ? where cod_produto = ?";
 
         try {
             PreparedStatement prepara = connection.prepareStatement(sql);
 
             prepara.setInt(1, produto.getCodProduto());
             prepara.setString(2, produto.getDescricao());
-            prepara.setDouble(3, produto.getPreco());
+            prepara.setString(3, produto.getPreco());
             prepara.setBytes(4, produto.getImagem());
             prepara.setInt(5, cod);
             prepara.executeUpdate();
@@ -120,7 +120,7 @@ public class ProdutoDao {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
-                produto.setPreco(rs.getDouble("preco"));
+                produto.setPreco(rs.getString("preco"));
                
                 produtos.add(produto);
             }
@@ -152,7 +152,7 @@ public class ProdutoDao {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
-                produto.setPreco(rs.getDouble("preco"));
+                produto.setPreco(rs.getString("preco"));
                 produtos.add(produto);
             }
 
@@ -184,7 +184,7 @@ public class ProdutoDao {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
-                produto.setPreco(rs.getDouble("preco"));
+                produto.setPreco(rs.getString("preco"));
                 produtos.add(produto);
             }
 

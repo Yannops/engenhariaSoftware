@@ -13,7 +13,7 @@ public class Produto {
 
     private int codProduto;
     private String descricao;
-    private double preco;
+    private String preco;
     private String tipo;
     private byte[] imagem;
 
@@ -41,11 +41,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public double getPreco() {
+    public String getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
     }
 

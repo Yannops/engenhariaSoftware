@@ -41,7 +41,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         tcod = new javax.swing.JTextField();
         tdesc = new javax.swing.JTextField();
-        tpreco = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabelimagem = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -56,6 +55,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tableprod = new javax.swing.JTable();
         jPesquisar = new javax.swing.JButton();
+        tpreco = new javax.swing.JFormattedTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,7 +78,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(tcod, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 39, 130, -1));
         getContentPane().add(tdesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 72, 130, -1));
-        getContentPane().add(tpreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 135, 130, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Descricao");
@@ -153,7 +152,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Cód_Produto", "Descrição", "Unidade", "Preço"
+                "Cód_Produto", "Descrição", "Preço", "Unidade"
             }
         ));
         tableprod.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,13 +173,17 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 52, -1, -1));
 
+        tpreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        tpreco.setText("R$");
+        getContentPane().add(tpreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 130, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastraActionPerformed
         Produto p = new Produto();
 
-        double num = Double.parseDouble(tpreco.getText());
+        String num = (tpreco.getText());
         int cod = Integer.parseInt(tcod.getText());
         p.setCodProduto(cod);
         p.setDescricao(tdesc.getText());
@@ -191,7 +194,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
         ProdutoDao dao = new ProdutoDao();
         try {
-            if (jlabelimagemaction.getText().equals("")) {
+            if (jlabelimagemaction.getIcon() == null) {
                 dao.adiciona(p);
                 JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
             } else {
@@ -213,8 +216,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
     private void SelecionaEpreencheCampos() {
         // passando da linha selecionada da table para os TextFiel 
-        ProdutoDao produtoDao = new ProdutoDao();
-
         int indice = tableprod.getSelectedRow();
         tcod.setText(tableprod.getValueAt(indice, 0).toString());
 
@@ -290,17 +291,15 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         ProdutoDao produtoDao = new ProdutoDao();
         produto.setCodProduto(Integer.parseInt(tcod.getText()));
         produto.setDescricao(tdesc.getText());
-        produto.setPreco(Double.parseDouble(tpreco.getText()));
+        produto.setPreco(tpreco.getText());
         produto.setImagem(Imagem.getImgBytes(imagem));
 
         try {
             produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
-
+            JOptionPane.showMessageDialog(null, "Produto Alterado !");
         } catch (SQLException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Produto Alterado!");
-
         limpaTable();
         limparCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -344,16 +343,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         tableprod.updateUI();
     }
 
-    private void carregaImagem() {
-        try {
-            Integer id = Integer.parseInt(tcod.getText());
-            ProdutoDao dao = new ProdutoDao();
-            Produto prod = dao.buscaimagem(id);
-            Imagem.exibiImagemLabel(prod.getImagem(), jLabelimagem);
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadastra;
@@ -376,6 +365,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTable tableprod;
     private javax.swing.JTextField tcod;
     private javax.swing.JTextField tdesc;
-    private javax.swing.JTextField tpreco;
+    private javax.swing.JFormattedTextField tpreco;
     // End of variables declaration//GEN-END:variables
 }
