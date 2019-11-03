@@ -55,7 +55,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tableprod = new javax.swing.JTable();
         jPesquisar = new javax.swing.JButton();
-        tpreco = new javax.swing.JFormattedTextField();
+        tpreco = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,9 +172,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 52, -1, -1));
-
-        tpreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-        tpreco.setText("R$");
         getContentPane().add(tpreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 130, -1));
 
         pack();
@@ -182,14 +179,11 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
     private void bCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastraActionPerformed
         Produto p = new Produto();
-
-        String num = (tpreco.getText());
-        int cod = Integer.parseInt(tcod.getText());
-        p.setCodProduto(cod);
+        
+        p.setCodProduto(Integer.parseInt(tcod.getText()));
         p.setDescricao(tdesc.getText());
-        p.setPreco(num);
-        String b = (String) cbTipo.getSelectedItem();
-        p.setTipo(b);
+        p.setPreco(Double.parseDouble(tpreco.getText()));
+        p.setTipo(cbTipo.getSelectedItem().toString());
         p.setImagem(Imagem.getImgBytes(imagem));
 
         ProdutoDao dao = new ProdutoDao();
@@ -291,12 +285,18 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         ProdutoDao produtoDao = new ProdutoDao();
         produto.setCodProduto(Integer.parseInt(tcod.getText()));
         produto.setDescricao(tdesc.getText());
-        produto.setPreco(tpreco.getText());
+        produto.setPreco(Double.parseDouble(tpreco.getText()));
         produto.setImagem(Imagem.getImgBytes(imagem));
 
         try {
-            produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
-            JOptionPane.showMessageDialog(null, "Produto Alterado !");
+            if(jlabelimagemaction.getIcon().getIconHeight() != 0 && jlabelimagemaction.getIcon().getIconWidth() != 0){
+             produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
+             JOptionPane.showMessageDialog(null, "Produto Alterado !");    
+            } else{
+                produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
+                JOptionPane.showMessageDialog(null, "Produto Alterado !");
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -365,6 +365,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTable tableprod;
     private javax.swing.JTextField tcod;
     private javax.swing.JTextField tdesc;
-    private javax.swing.JFormattedTextField tpreco;
+    private javax.swing.JTextField tpreco;
     // End of variables declaration//GEN-END:variables
 }

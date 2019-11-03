@@ -59,7 +59,7 @@ public class PedidoDao {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
-                produto.setPreco(rs.getString("preco"));
+                produto.setPreco(rs.getDouble("preco"));
                 produtos.add(produto);
             }
 

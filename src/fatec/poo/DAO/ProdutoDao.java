@@ -56,10 +56,10 @@ public class ProdutoDao {
 
         PreparedStatement prepara = connection.prepareStatement(sql);
 
-        prepara.setInt(1, (int) produto.getCodProduto());
+        prepara.setInt(1,  produto.getCodProduto());
         prepara.setString(2, produto.getDescricao());
         prepara.setString(4, produto.getTipo());
-        prepara.setString(3, produto.getPreco());
+        prepara.setDouble(3, produto.getPreco());
         prepara.setBytes(5,  produto.getImagem());
         prepara.executeUpdate();
         prepara.close();
@@ -75,7 +75,7 @@ public class ProdutoDao {
 
             prepara.setInt(1, produto.getCodProduto());
             prepara.setString(2, produto.getDescricao());
-            prepara.setString(3, produto.getPreco());
+            prepara.setDouble(3, produto.getPreco());
             prepara.setBytes(4, produto.getImagem());
             prepara.setInt(5, cod);
             prepara.executeUpdate();
@@ -120,7 +120,7 @@ public class ProdutoDao {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
-                produto.setPreco(rs.getString("preco"));
+                produto.setPreco(rs.getDouble("preco"));
                
                 produtos.add(produto);
             }
@@ -152,7 +152,7 @@ public class ProdutoDao {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
-                produto.setPreco(rs.getString("preco"));
+                produto.setPreco(rs.getDouble("preco"));
                 produtos.add(produto);
             }
 
@@ -184,7 +184,7 @@ public class ProdutoDao {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
-                produto.setPreco(rs.getString("preco"));
+                produto.setPreco(rs.getDouble("preco"));
                 produtos.add(produto);
             }
 
