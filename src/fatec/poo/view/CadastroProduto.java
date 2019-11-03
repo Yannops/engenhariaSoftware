@@ -45,7 +45,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jLabelimagem = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        bCadastra = new javax.swing.JButton();
+        blimpar = new javax.swing.JButton();
         cbTipo = new javax.swing.JComboBox();
         jlabelimagemaction = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -56,6 +56,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         tableprod = new javax.swing.JTable();
         jPesquisar = new javax.swing.JButton();
         tpreco = new javax.swing.JTextField();
+        bCadastra1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,14 +96,14 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jLabel6.setText("Preço");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 134, -1, -1));
 
-        bCadastra.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        bCadastra.setText("Cadastrar");
-        bCadastra.addActionListener(new java.awt.event.ActionListener() {
+        blimpar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        blimpar.setText("Limpar");
+        blimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCadastraActionPerformed(evt);
+                blimparActionPerformed(evt);
             }
         });
-        getContentPane().add(bCadastra, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 161, 103, -1));
+        getContentPane().add(blimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 103, -1));
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "kg", "ml", "unid" }));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +123,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 227, 103, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 103, -1));
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Excluir");
@@ -131,7 +132,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 194, 103, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 103, -1));
 
         jimagem.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jimagem.setText("Imagem");
@@ -140,7 +141,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                 jimagemActionPerformed(evt);
             }
         });
-        getContentPane().add(jimagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 260, 103, -1));
+        getContentPane().add(jimagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 103, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Cód do Produto");
@@ -174,35 +175,21 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         getContentPane().add(jPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 52, -1, -1));
         getContentPane().add(tpreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 130, -1));
 
+        bCadastra1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        bCadastra1.setText("Cadastrar");
+        bCadastra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCadastra1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bCadastra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 103, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastraActionPerformed
-        Produto p = new Produto();
-        
-        p.setCodProduto(Integer.parseInt(tcod.getText()));
-        p.setDescricao(tdesc.getText());
-        p.setPreco(Double.parseDouble(tpreco.getText()));
-        p.setTipo(cbTipo.getSelectedItem().toString());
-        p.setImagem(Imagem.getImgBytes(imagem));
-
-        ProdutoDao dao = new ProdutoDao();
-        try {
-            if (jlabelimagemaction.getIcon() == null) {
-                dao.adiciona(p);
-                JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
-            } else {
-                dao.adiciona(p);
-                JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Código de Produto Já Cadastrado Anteriormente!");
-        }
-
-        limparCampos();
-
-    }//GEN-LAST:event_bCadastraActionPerformed
+    private void blimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blimparActionPerformed
+          limparCampos();
+    }//GEN-LAST:event_blimparActionPerformed
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
@@ -289,14 +276,14 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         produto.setImagem(Imagem.getImgBytes(imagem));
 
         try {
-            if(jlabelimagemaction.getIcon().getIconHeight() != 0 && jlabelimagemaction.getIcon().getIconWidth() != 0){
-             produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
-             JOptionPane.showMessageDialog(null, "Produto Alterado !");    
-            } else{
+            if (jlabelimagemaction.getIcon().getIconHeight() != 0 && jlabelimagemaction.getIcon().getIconWidth() != 0) {
+                produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
+                JOptionPane.showMessageDialog(null, "Produto Alterado !");
+            } else {
                 produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
                 JOptionPane.showMessageDialog(null, "Produto Alterado !");
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -331,6 +318,35 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jimagemActionPerformed
 
+    private void bCadastra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastra1ActionPerformed
+           Produto p = new Produto();
+
+        p.setCodProduto(Integer.parseInt(tcod.getText()));
+        p.setDescricao(tdesc.getText());
+        p.setPreco(Double.parseDouble(tpreco.getText()));
+        p.setTipo(cbTipo.getSelectedItem().toString());
+        ProdutoDao dao = new ProdutoDao();
+        if (jlabelimagemaction.getIcon() == null) {
+            try {
+                dao.adiciona(p);
+                JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Código de Produto Já Cadastrado Anteriormente!");
+            }
+        } else {
+            p.setImagem(Imagem.getImgBytes(imagem));
+            try {
+                dao.adiciona(p);
+                JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Código de Produto Já Cadastrado Anteriormente!");
+            }
+        }
+
+        limparCampos();
+    }//GEN-LAST:event_bCadastra1ActionPerformed
+
     private void limparCampos() {
         tcod.setText("");
         tpreco.setText("");
@@ -345,7 +361,8 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bCadastra;
+    private javax.swing.JButton bCadastra1;
+    private javax.swing.JButton blimpar;
     private javax.swing.JComboBox cbTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
