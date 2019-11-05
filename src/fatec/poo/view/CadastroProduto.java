@@ -4,11 +4,17 @@ import fatec.poo.DAO.ProdutoDao;
 import fatec.poo.model.Produto;
 import fatec.poo.util.Imagem;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -188,7 +194,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void blimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blimparActionPerformed
-          limparCampos();
+        limparCampos();
     }//GEN-LAST:event_blimparActionPerformed
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
@@ -215,6 +221,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             ProdutoDao dao = new ProdutoDao();
             Produto prod = dao.buscaimagem(id);
             Imagem.exibiImagemLabel(prod.getImagem(), jlabelimagemaction);
+
         } catch (SQLException ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -273,24 +280,48 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         produto.setCodProduto(Integer.parseInt(tcod.getText()));
         produto.setDescricao(tdesc.getText());
         produto.setPreco(Double.parseDouble(tpreco.getText()));
-        produto.setImagem(Imagem.getImgBytes(imagem));
 
-        try {
-            if (jlabelimagemaction.getIcon().getIconHeight() != 0 && jlabelimagemaction.getIcon().getIconWidth() != 0) {
+        if (jlabelimagemaction.getIcon() == null) {
+            try {
                 produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
-                JOptionPane.showMessageDialog(null, "Produto Alterado !");
-            } else {
-                produtoDao.update(produto, (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
-                JOptionPane.showMessageDialog(null, "Produto Alterado !");
+                JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " alterado com Sucesso !");
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Código de Produto Já Cadastrado Anteriormente!");
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } else if (jlabelimagemaction.getIcon() != null) {
+            
+            
+            System.out.println("");
+            produto.setImagem(Imagem.getImgBytes((BufferedImage) iconToImage(jlabelimagemaction.getIcon())));
+            try {
+                produtoDao.update(produto,
+                        (int) tableprod.getValueAt(tableprod.getSelectedRow(), 0));
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
         limpaTable();
         limparCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    static Image iconToImage(Icon icon) {
+        if (icon instanceof ImageIcon) {
+            return ((ImageIcon) icon).getImage();
+        } else {
+            int w = icon.getIconWidth();
+            int h = icon.getIconHeight();
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice gd = ge.getDefaultScreenDevice();
+            GraphicsConfiguration gc = gd.getDefaultConfiguration();
+            BufferedImage image = gc.createCompatibleImage(w, h);
+            Graphics2D g = image.createGraphics();
+            icon.paintIcon(null, g, 0, 0);
+            g.dispose();
+            return image;
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ProdutoDao produtoDao = new ProdutoDao();
         Produto produto = new Produto();
@@ -319,7 +350,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jimagemActionPerformed
 
     private void bCadastra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastra1ActionPerformed
-           Produto p = new Produto();
+        Produto p = new Produto();
 
         p.setCodProduto(Integer.parseInt(tcod.getText()));
         p.setDescricao(tdesc.getText());
@@ -336,6 +367,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             }
         } else {
             p.setImagem(Imagem.getImgBytes(imagem));
+            System.out.println("");
             try {
                 dao.adiciona(p);
                 JOptionPane.showMessageDialog(null, "O Produto " + tdesc.getText() + " Inserido com Sucesso !");
