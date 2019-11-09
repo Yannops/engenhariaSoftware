@@ -34,12 +34,15 @@ public class ProdutoDao {
     }
 
     public Produto pp(int cod) throws SQLException {
-        String query = "SELECT descricao , preco ,tipo FROM produto  WHERE cod_produto  = " + cod + "";
+        String query = "SELECT cod_produto,descricao , preco ,tipo FROM produto  WHERE cod_produto  = " + cod + "";
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt = con.prepareStatement(query);
         ResultSet rs = stmt.executeQuery();
+        rs.next();
         Produto produto = new Produto();
+        produto.setCodProduto(rs.getInt("cod_produto"));
         produto.setDescricao(rs.getString("descricao"));
         produto.setPreco(rs.getDouble("preco"));
         produto.setTipo(rs.getString("tipo"));
