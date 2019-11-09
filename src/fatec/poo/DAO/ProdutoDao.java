@@ -32,22 +32,35 @@ public class ProdutoDao {
     public ProdutoDao() {
         this.connection = new ConnectionFactory().getConnection();
     }
-    
-    public Produto buscaimagem(int cod) throws SQLException{
+
+    public Produto pp(int cod) throws SQLException {
+        String query = "SELECT descricao , preco ,tipo FROM produto  WHERE cod_produto  = " + cod + "";
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt = con.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+        Produto produto = new Produto();
+        produto.setDescricao(rs.getString("descricao"));
+        produto.setPreco(rs.getDouble("preco"));
+        produto.setTipo(rs.getString("tipo"));
+        return produto;
+    }
+
+    public Produto buscaimagem(int cod) throws SQLException {
         Produto retorno = null;
         String sql = "SELECT imagem, cod_produto from produto where cod_produto = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        
+
         try {
             stmt.setInt(1, cod);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 retorno = new Produto();
                 retorno.setImagem(rs.getBytes("imagem"));
             }
         } catch (Exception e) {
         }
-       return retorno;
+        return retorno;
     }
 
     public void adiciona(Produto produto) throws SQLException {
@@ -56,11 +69,11 @@ public class ProdutoDao {
 
         PreparedStatement prepara = connection.prepareStatement(sql);
 
-        prepara.setInt(1,  produto.getCodProduto());
+        prepara.setInt(1, produto.getCodProduto());
         prepara.setString(2, produto.getDescricao());
         prepara.setString(4, produto.getTipo());
         prepara.setDouble(3, produto.getPreco());
-        prepara.setBytes(5,  produto.getImagem());
+        prepara.setBytes(5, produto.getImagem());
         prepara.executeUpdate();
         prepara.close();
 
@@ -121,7 +134,7 @@ public class ProdutoDao {
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setTipo(rs.getString("tipo"));
                 produto.setPreco(rs.getDouble("preco"));
-               
+
                 produtos.add(produto);
             }
 
@@ -196,7 +209,5 @@ public class ProdutoDao {
 
         return produtos;
     }
-
-    
 
 }
