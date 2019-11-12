@@ -30,7 +30,7 @@ public class FuncionarioDao {
     }
 
     public void adiciona(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (nome, cpf, dt_Nascimento, cargo) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO funcionario (nome, cpf, dt_Nascimento, cargo, senha) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -38,6 +38,7 @@ public class FuncionarioDao {
             stmt.setString(2, funcionario.getCPF());
             stmt.setString(3, funcionario.getDataNascimento());
             stmt.setLong(4, funcionario.getCargo());
+            stmt.setString(5, funcionario.getSenha());
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {
@@ -122,5 +123,43 @@ public class FuncionarioDao {
             throw new RuntimeException(u);
         }
     }
-
+    
+    public Funcionario verificarLogin(String CPF, String senha){
+        Funcionario funcionario = null;
+        ResultSet rs = null;
+        String sql = "select * from funcionario where cpf = ? and senha = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, CPF);
+            stmt.setString(2, senha);
+            
+            rs = stmt.executeQuery();
+            
+            if(rs.isBeforeFirst()){
+                funcionario = new Funcionario();
+                
+                while(rs.next()){
+                    funcionario.setId(rs.getLong("id_funcionario"));
+                    funcionario.setNome(rs.getString("nome"));
+                    funcionario.setCargo(rs.getLong("cargo"));
+                    funcionario.setCPF(rs.getString("cpf"));
+                    funcionario.setDataNascimento(rs.getString("dt_Nascimento"));
+                    funcionario.setSenha(rs.getString("senha"));
+                }
+                return funcionario;
+            }else{
+                return funcionario;
+            }
+            
+            
+            
+        } catch (Exception e) {
+            
+        }
+        
+        
+        return funcionario;
+        
+    }
 }

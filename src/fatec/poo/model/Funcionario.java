@@ -15,6 +15,8 @@ public class Funcionario {
     private String nome;
     private String CPF;
     private String dataNascimento;
+    private String senha;
+
     private long cargo;
 
     public long getId() {
@@ -55,6 +57,14 @@ public class Funcionario {
 
     public void setCargo(long cargo) {
         this.cargo = cargo;
+    }
+    
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 
