@@ -24,13 +24,14 @@ public class FuncionarioDao {
     String CPF;
     String dataNascimento;
     String  cargo;
-
+    String telefone;
+    
     public FuncionarioDao() {
         this.connection = new ConnectionFactory().getConnection();
     }
 
     public void adiciona(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (nome, cpf, dt_Nascimento, cargo, senha) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO funcionario (nome, cpf, dt_Nascimento, cargo, senha) VALUES(?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -38,7 +39,8 @@ public class FuncionarioDao {
             stmt.setString(2, funcionario.getCPF());
             stmt.setString(3, funcionario.getDataNascimento());
             stmt.setLong(4, funcionario.getCargo());
-            stmt.setString(5, funcionario.getSenha());
+            stmt.setString(5, funcionario.getTelefone());
+            stmt.setString(6, funcionario.getSenha());
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {
@@ -83,6 +85,8 @@ public class FuncionarioDao {
                 funcionario[i].setNome(rs.getString("nome"));
                 funcionario[i].setCPF(rs.getString("cpf"));
                 funcionario[i].setCargo(rs.getLong("cargo"));
+                funcionario[i].setTelefone(rs.getString("telefone"));
+                funcionario[i].setSenha(rs.getString("senha"));
                 funcionario[i].setDataNascimento(rs.getString("dt_Nascimento"));
                 i++;
             }
@@ -109,14 +113,16 @@ public class FuncionarioDao {
     }
     
     public void alterar(Funcionario f, String cpf){
-        String sql = "UPDATE funcionario SET nome = ?, cargo = ?, cpf = ?, dt_Nascimento = ? WHERE cpf = ?";
+        String sql = "UPDATE funcionario SET nome = ?, cargo = ?, cpf = ?, dt_Nascimento = ?, senha = ?, telefone = ? WHERE cpf = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, f.getNome());
             stmt.setLong(2, f.getCargo());
             stmt.setString(3, f.getCPF());
             stmt.setString(4, f.getDataNascimento());
-            stmt.setString(5, cpf);
+            stmt.setString(5, f.getSenha());
+            stmt.setString(6, f.getTelefone());
+            stmt.setString(7, cpf);
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException u) {
@@ -145,6 +151,7 @@ public class FuncionarioDao {
                     funcionario.setCargo(rs.getLong("cargo"));
                     funcionario.setCPF(rs.getString("cpf"));
                     funcionario.setDataNascimento(rs.getString("dt_Nascimento"));
+                    funcionario.setTelefone(rs.getString("telefone"));
                     funcionario.setSenha(rs.getString("senha"));
                 }
                 return funcionario;

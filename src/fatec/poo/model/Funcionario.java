@@ -16,7 +16,8 @@ public class Funcionario {
     private String CPF;
     private String dataNascimento;
     private String senha;
-
+    private String telefone;
+    
     private long cargo;
 
     public long getId() {
@@ -27,6 +28,14 @@ public class Funcionario {
         this.id = id;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    
     public String getNome() {
         return nome;
     }

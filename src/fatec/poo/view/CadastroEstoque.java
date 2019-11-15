@@ -6,9 +6,12 @@
 package fatec.poo.view;
 
 import fatec.poo.DAO.EstoqueDAO;
+import fatec.poo.model.Estoque;
 import fatec.poo.model.Produto;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -76,6 +79,11 @@ public final class CadastroEstoque extends javax.swing.JInternalFrame {
 
         btnAdd.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnAdd.setText("Adicionar");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         gridEstoque.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         gridEstoque.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,7 +124,7 @@ public final class CadastroEstoque extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtcodprod, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(117, 117, 117)
+                                .addGap(64, 64, 64)
                                 .addComponent(btnAdd))
                             .addComponent(txtdesc, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,7 +133,7 @@ public final class CadastroEstoque extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +159,7 @@ public final class CadastroEstoque extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtquant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -163,7 +171,26 @@ public final class CadastroEstoque extends javax.swing.JInternalFrame {
            selecionaepreenchecampos();
     }//GEN-LAST:event_gridEstoqueMouseClicked
 
-    
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        Estoque estoque = new Estoque();
+        EstoqueDAO estoqueDAO = new EstoqueDAO();
+        estoque.setCod(0);
+        estoque.setCod_produto(Integer.parseInt(txtcodprod.getText()));
+        estoque.setDescricao(txtdesc.getText());
+        estoque.setPreco(Double.parseDouble(txtpreco.getText()));
+        estoque.setData(txtdata.getText());
+        estoque.setQuantidade(Integer.parseInt(txtquant.getText()));
+        estoqueDAO.adiciona(estoque);
+        JOptionPane.showMessageDialog(null, "Produto " + txtdesc.getText() + " adicionado ao estoque!");
+        limparCampos();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void limparCampos() {
+        txtcodprod.setText("");
+        txtdesc.setText("");
+        txtpreco.setText("");
+        txtquant.setText("");
+    }
     
     public void setdataintable(){
         DefaultTableModel modelo = (DefaultTableModel) gridEstoque.getModel();

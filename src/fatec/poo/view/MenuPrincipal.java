@@ -233,7 +233,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CadastroEstoque f = new CadastroEstoque();
         //ccv.setVisible(true);
         desktop.add(f);
-        this.setLocationRelativeTo(null);
         f.show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
@@ -241,7 +240,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ConsultarEstoque f = new ConsultarEstoque();
         //ccv.setVisible(true);
         desktop.add(f);
-        this.setLocationRelativeTo(null);
         f.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 

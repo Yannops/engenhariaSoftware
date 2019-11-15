@@ -34,18 +34,19 @@ public class EstoqueDAO {
     }
 
     public void adiciona(Estoque estoque) {
-        String sql = "INSERT INTO entrada_produto VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO entrada_produto VALUES(?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-
-            stmt.setInt(1, estoque.getCod_produto());
-            stmt.setString(2, estoque.getDescricao());
-            stmt.setString(3, estoque.getData());
-            stmt.setDouble(4, estoque.getPreco());
-            stmt.setInt(5, estoque.getQuantidade());
-
+            stmt.setInt(1, estoque.getCod());
+            stmt.setInt(2, estoque.getCod_produto());
+            stmt.setString(3, estoque.getDescricao());
+            stmt.setInt(4, estoque.getQuantidade());
+            stmt.setDouble(5, estoque.getPreco());
+            stmt.setString(6, estoque.getData());   
+            stmt.execute();
+            stmt.close();
         } catch (SQLException a) {
-            throw new RuntimeException();
+            System.out.println(a);
         }
 
     }
@@ -58,7 +59,7 @@ public class EstoqueDAO {
 
         List<Produto> produtos = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT cod_produto, descricao, preco from produto");
+            stmt = con.prepareStatement("SELECT cod_produto, descricao, preco_venda from produto");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -66,12 +67,12 @@ public class EstoqueDAO {
 
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setPreco(rs.getDouble("preco"));
+                produto.setPreco(rs.getDouble("preco_venda"));
 
                 produtos.add(produto);
             }
         } catch (SQLException a) {
-            throw new RuntimeException();
+            System.out.println(a);
         }
         return produtos;
     }
@@ -83,7 +84,7 @@ public class EstoqueDAO {
 
         List<Estoque> estoques = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT cod_produto, descricao, quant, preco from estoque");
+            stmt = con.prepareStatement("SELECT cod_produto, descricao, quant, preco_compra from estoque");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -91,7 +92,7 @@ public class EstoqueDAO {
 
                 estoque.setCod_produto(rs.getInt("cod_produto"));
                 estoque.setDescricao(rs.getString("descricao"));
-                estoque.setPreco(rs.getDouble("preco"));
+                estoque.setPreco(rs.getDouble("preco_compra"));
                 estoque.setQuantidade(rs.getInt("quant"));
 
                 estoques.add(estoque);
