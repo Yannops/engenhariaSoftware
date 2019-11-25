@@ -15,6 +15,7 @@ public class Produto {
     private String descricao;
     private double preco;
     private String tipo;
+    private int quantidadeVenda;
     private byte[] imagem;
 
     public byte[] getImagem() {
@@ -24,7 +25,7 @@ public class Produto {
     public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
-            
+
     public int getCodProduto() {
         return codProduto;
     }
@@ -49,7 +50,6 @@ public class Produto {
         this.preco = preco;
     }
 
-
     public String getTipo() {
         return tipo;
     }
@@ -57,8 +57,13 @@ public class Produto {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    
-    
+
+    public int getQuantidadeVenda() {
+        return quantidadeVenda;
+    }
+
+    public void setQuantidadeVenda(int quantidadeVenda) {
+        this.quantidadeVenda = quantidadeVenda;
+    }
 
 }

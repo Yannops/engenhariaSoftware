@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,6 +34,62 @@ public class EstoqueDAO {
         this.connection = new ConnectionFactory().getConnection();
     }
 
+    public Estoque consultaProdutoEstoque(int codProd) throws SQLException {
+        Estoque e = new Estoque();;
+        int retorno = 0;
+        String query = "SELECT cod_produto,quant,saindo FROM estoque WHERE cod_produto = " + codProd + "";
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt = con.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        e.setQuantidade(rs.getInt("quant"));
+        e.setCod_produto(rs.getInt("cod_produto"));
+        e.setSaindo(rs.getInt("saindo"));
+        stmt.close();
+        return e;
+    }
+
+    public Estoque quantidadeSaindo(Estoque e) throws SQLException {
+        String sql = "SELECT saindo from ESTOQUE where cod_produto = " + e.getCod_produto() + "";
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        e.setSaindo(rs.getInt("saindo"));
+
+        return e;
+    }
+
+    public Estoque saindoProduto(Estoque e) throws SQLException {
+        String sql = "UPDATE estoque SET saindo = ? where cod_produto = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, e.getSaindo());
+        stmt.setInt(2, e.getCod_produto());
+        stmt.execute();
+        stmt.close();
+        return e;
+    }
+
+    public Estoque transitoPedidoItemPed(int codProd) {
+
+        return null;
+    }
+
+    public void adicionaSaindo(Estoque e) throws SQLException {
+        
+        String sql = "INSERT INTO saida_estoque VALUES(?,?,?,?,?,?)";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, e.getCod());
+        stmt.setInt(2, e.getCod());
+        stmt.setString(3, e.getDescricao());
+        stmt.setInt(4, e.getQuantidade());
+        stmt.setDouble(5, e.getPreco());
+        stmt.setString(6, e.getData());
+     
+    }
+
     public void adiciona(Estoque estoque) {
         String sql = "INSERT INTO entrada_produto VALUES(?,?,?,?,?,?)";
         try {
@@ -42,13 +99,12 @@ public class EstoqueDAO {
             stmt.setString(3, estoque.getDescricao());
             stmt.setInt(4, estoque.getQuantidade());
             stmt.setDouble(5, estoque.getPreco());
-            stmt.setString(6, estoque.getData());   
+            stmt.setString(6, estoque.getData());
             stmt.execute();
             stmt.close();
         } catch (SQLException a) {
             System.out.println(a);
         }
-
     }
 
     public List<Produto> lêbancoproduto() {
@@ -68,7 +124,6 @@ public class EstoqueDAO {
                 produto.setCodProduto(rs.getInt("cod_produto"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getDouble("preco_venda"));
-
                 produtos.add(produto);
             }
         } catch (SQLException a) {

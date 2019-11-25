@@ -172,7 +172,7 @@ public class TableProdutoVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutoMouseClicked
-
+        
         TableModel model1 = tableProduto.getModel();
         int index[] = tableProduto.getSelectedRows();
         Object[] row = new Object[5];

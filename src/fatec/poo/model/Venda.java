@@ -5,6 +5,7 @@
  */
 package fatec.poo.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -18,6 +19,17 @@ public class Venda {
     private List<ProdutoVenda> produtoVebda;
     private Cliente clienteVenda;
     private double valorTotalVenda;
+    private Pedido idPedido;
+    private LocalDate data;
+    private int codPagamento;
+
+    public Pedido getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Pedido idPedido) {
+        this.idPedido = idPedido;
+    }
 
     public long getIdVenda() {
         return idVenda;
@@ -57,6 +69,22 @@ public class Venda {
 
     public void setValorTotalVenda(double valorTotalVenda) {
         this.valorTotalVenda = valorTotalVenda;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public int getCodPagamento() {
+        return codPagamento;
+    }
+
+    public void setCodPagamento(int codPagamento) {
+        this.codPagamento = codPagamento;
     }
 
 }

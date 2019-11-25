@@ -34,7 +34,7 @@ public class ProdutoDao {
     }
 
     public Produto pp(int cod) throws SQLException {
-        String query = "SELECT cod_produto,descricao , preco ,tipo FROM produto  WHERE cod_produto  = " + cod + "";
+        String query = "SELECT cod_produto,descricao , preco_venda ,tipo FROM produto  WHERE cod_produto  = " + cod + "";
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = connection.prepareStatement(query);
@@ -62,13 +62,14 @@ public class ProdutoDao {
                 retorno.setImagem(rs.getBytes("imagem"));
             }
         } catch (Exception e) {
+            System.out.println("Produto não contém imagem !");
         }
         return retorno;
     }
 
     public void adiciona(Produto produto) throws SQLException {
 
-        String sql = "INSERT INTO produto (cod_produto,descricao,preco_venda,tipo,imagem) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO produto VALUES (?,?,?,?,?)";
 
         PreparedStatement prepara = connection.prepareStatement(sql);
 

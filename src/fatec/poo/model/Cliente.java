@@ -13,6 +13,7 @@ import java.time.LocalDate;
  */
 public class Cliente {
     
+    private int id ;
     private String nome ;
     private String cpfCnpj;
     private String email ;
@@ -21,6 +22,15 @@ public class Cliente {
     private String observalcao;
     private LocalDate data;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public String getNome() {
         return nome;
     }

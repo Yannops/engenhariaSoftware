@@ -1,4 +1,3 @@
-
 package fatec.poo.model;
 
 /**
@@ -6,12 +5,14 @@ package fatec.poo.model;
  * @author Group
  */
 public class Estoque {
+
     private int cod;
     private int cod_produto;
     private String descricao;
     private int quantidade;
     private double preco;
     private String data;
+    private int saindo;
 
     public String getDescricao() {
         return descricao;
@@ -20,7 +21,7 @@ public class Estoque {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
     public int getCod() {
         return cod;
     }
@@ -60,7 +61,13 @@ public class Estoque {
     public void setData(String data) {
         this.data = data;
     }
-    
-    
-    
+
+    public int getSaindo() {
+        return saindo;
+    }
+
+    public void setSaindo(int saindo) {
+        this.saindo = saindo;
+    }
+
 }

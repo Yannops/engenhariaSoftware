@@ -105,7 +105,7 @@ public class Login extends javax.swing.JFrame {
         Funcionario func = fdao.verificarLogin(txtCPF.getText(), txtSenha.getText());
         if (func != null) {
             this.setVisible(false);
-            new MenuPrincipal().setVisible(true);
+            new MenuPrincipal(func).setVisible(true);
         } else {
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, "CPF e/ou senha incorretos", "Funcionário não encontrado", JOptionPane.ERROR_MESSAGE);

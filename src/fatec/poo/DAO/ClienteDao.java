@@ -6,7 +6,6 @@
 package fatec.poo.DAO;
 
 import fatec.poo.factory.ConnectionFactory;
-import fatec.poo.model.Produto;
 import fatec.poo.model.Cliente;
 import fatec.poo.model.Endereco;
 import java.sql.Connection;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +23,7 @@ import javax.swing.JOptionPane;
  * @author Kaique
  */
 public class ClienteDao {
-    
+
     private Connection connection;
     Long id;
     String nome;
@@ -36,11 +34,11 @@ public class ClienteDao {
     String rua;
     String cidade;
     long numero;
-    
+
     public ClienteDao() {
         this.connection = new ConnectionFactory().getConnection();
     }
-    
+
     public void adiciona(Cliente cliente, Endereco endereco) {
         String sql = "INSERT INTO cliente (nome,cpf,email,telefone,bairro,rua,cidade,numero,observacao) VALUES(?,?,?,?,?,?,?,?,?)";
         try {
@@ -54,7 +52,7 @@ public class ClienteDao {
             stmt.setString(7, endereco.getCidade());
             stmt.setInt(8, (int) endereco.getNumero());
             stmt.setString(9, cliente.getObservalcao());
-            
+
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {
@@ -63,26 +61,26 @@ public class ClienteDao {
         /*        }catch(MySQLIntegrityConstraintViolationException ex){
          */
     }
-    
+
     public void delete(Cliente c) {
-        
+
         String sql = "DELETE FROM cliente WHERE id  = (SELECT id FROM cliente WHERE cpf = ?)";
-        
+
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, c.getCpfCnpj());
             stmt.execute();
             stmt.close();
             JOptionPane.showMessageDialog(null, "Deletado com Sucesso!");
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Aconteceu algum Erro !");
         }
     }
-    
+
     public Cliente retornaCliente(int cod) throws SQLException {
-        String sql = "Select nome, cpf, email, telefone, bairro, rua, cidade, numero,observacao FROM cliente where id = " + cod + "";
-        
+        String sql = "Select id, nome, cpf, email, telefone, bairro, rua, cidade, numero,observacao FROM cliente where id = " + cod + "";
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt = con.prepareStatement(sql);
@@ -90,6 +88,7 @@ public class ClienteDao {
         rs.next();
         Cliente cli = new Cliente();
         Endereco end = new Endereco();
+        cli.setId(rs.getInt("id"));
         cli.setNome(rs.getString("nome"));
         cli.setCpfCnpj(rs.getString("cpf"));
         cli.setTelefone(rs.getString("telefone"));
@@ -101,14 +100,14 @@ public class ClienteDao {
         end.setNumero(rs.getInt("numero"));
         cli.adiciona(end);
         cli.setCpfCnpj(rs.getString("cpf"));
-        
+
         return cli;
     }
-    
+
     public void Update(Cliente c, Endereco e) {
-        
+
         String sql = "UPDATE cliente SET nome  =? ,cpf = ?,email = ?,telefone=?,bairro=?,rua=?,cidade=?,numero=?,observacao=? where id = (SELECT id from cliente where nome = ?)";
-        
+
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, c.getNome());
@@ -124,32 +123,32 @@ public class ClienteDao {
             stmt.executeUpdate();
             stmt.close();
             JOptionPane.showMessageDialog(null, "Atualizado com Sucesso!");
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Aconteceu algum Erro !");
         }
     }
-    
+
     public List<Cliente> readForDesc(String desc) {
-        
+
         Connection con = ConnectionFactory.getConnection();
-        
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         List<Cliente> clientes = new ArrayList<>();
         List<Endereco> enderecos = new ArrayList<>();
         try {
             stmt = con.prepareStatement("SELECT * FROM cliente WHERE nome LIKE ?");
             stmt.setString(1, "%" + desc + "%");
-            
+
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
-                
+
                 Cliente cli = new Cliente();
                 Endereco end = new Endereco();
-                
+
                 cli.setNome(rs.getString("nome"));
                 cli.setCpfCnpj(rs.getString("cpf"));
                 cli.setTelefone(rs.getString("telefone"));
@@ -162,16 +161,60 @@ public class ClienteDao {
                 cli.adiciona(end);
                 clientes.add(cli);
                 System.out.println("");
-                
+
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             //   ConnectionFactory.closeConnecttion(con, stmt, rs);
         }
-        
+
         return clientes;
     }
-    
+
+    public List<Cliente> readForTableClienteVenda(String desc) {
+
+        Connection con = ConnectionFactory.getConnection();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Cliente> clientes = new ArrayList<>();
+        List<Endereco> enderecos = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM cliente WHERE nome LIKE ?");
+            stmt.setString(1, "%" + desc + "%");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Cliente cli = new Cliente();
+                Endereco end = new Endereco();
+                cli.setId(rs.getInt("id"));
+                  cli.setNome(rs.getString("nome"));
+                cli.setCpfCnpj(rs.getString("cpf"));
+                cli.setTelefone(rs.getString("telefone"));
+                cli.setEmail(rs.getString("email"));
+                cli.setObservalcao(rs.getString("observacao"));
+                end.setBairro(rs.getString("bairro"));
+                end.setCidade(rs.getString("cidade"));
+                end.setRua(rs.getString("rua"));
+                end.setNumero(rs.getInt("numero"));
+                cli.adiciona(end);
+                clientes.add(cli);
+                System.out.println("");
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            //   ConnectionFactory.closeConnecttion(con, stmt, rs);
+        }
+
+        return clientes;
+    }
+
 }

@@ -31,7 +31,7 @@ public class FuncionarioDao {
     }
 
     public void adiciona(Funcionario funcionario) {
-        String sql = "INSERT INTO funcionario (nome, cpf, dt_Nascimento, cargo, senha) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO funcionario (nome, cpf, dt_Nascimento, cargo,telefone, senha) VALUES(?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
